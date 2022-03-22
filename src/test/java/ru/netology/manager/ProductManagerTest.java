@@ -20,7 +20,7 @@ class ProductManagerTest {
     Product fifth = new Smartphone(5, "AFifth", 300, "MobileInt1");
     Product sixth = new Smartphone(6, "ASixth", 400, "MobileInt2");
     Product seventh = new Smartphone(7, "ASeventh", 500, "MobileInt3");
-    Product eighth = new Smartphone(8, "AEighth", 600, "MobileInt4");
+    Product eighth = new Smartphone(8, "AEighth", 600, "MobileInt3");
 
     @BeforeEach
     void setUp(){
@@ -74,21 +74,29 @@ class ProductManagerTest {
     @Test
     void shouldNotFindInvalidAuthor(){
         Product[] actual = manager.searchBy("Kristie");
-        Product[] expected = {};
+        Product[] expected = new Product[]{};
         assertArrayEquals(expected, actual);
     }
 
     @Test
     void shouldNotFindByInvalidNameOfTheBook(){
         Product[] actual = manager.searchBy("Theatre");
-        Product[] expected = {};
+        Product[] expected = new Product[]{};
         assertArrayEquals(expected, actual);
     }
 
     @Test
     void shouldNotFindByInvalidCreatorOfTheSmartphone(){
         Product[] actual = manager.searchBy("MobileInt9");
-        Product[] expected = {};
+        Product[] expected = new Product[]{};
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void shouldFindTheSmartphonesByTheirCreator(){
+        String search = "MobileInt3";
+        Product[] actual = manager.searchBy(search);
+        Product[] expected = new Product[]{seventh, eighth};
         assertArrayEquals(expected, actual);
     }
 
